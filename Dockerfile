@@ -10,7 +10,8 @@ WORKDIR /app
 # Incluimos pnpm-lock.yaml si existe
 COPY package.json pnpm-lock.yaml* ./
 
-# Instalamos TODAS las dependencias
+# Instalamos TODAS las dependencias (y aprobamos scripts para evitar bloqueos)
+RUN pnpm config set approve-builds true
 RUN pnpm install --frozen-lockfile
 
 # Copiamos el resto del código fuente
@@ -32,7 +33,8 @@ ENV NODE_ENV=production
 # Copiamos archivos de dependencias
 COPY package.json pnpm-lock.yaml* ./
 
-# Instalamos SOLO dependencias de producción
+# Instalamos SOLO dependencias de producción (aprobando scripts)
+RUN pnpm config set approve-builds true
 RUN pnpm install --prod --frozen-lockfile
 
 # Copiamos los artefactos construidos
