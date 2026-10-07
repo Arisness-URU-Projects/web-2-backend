@@ -85,11 +85,12 @@
         "exclude": [
             "src/index.ts",
             "src/jsdoc/**",
-            "test/**",
-            "scripts/**",
-            "BO/**",
-            "public/**",
-            "docs/**"
+        ]
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "bcrypt",
+            "esbuild"
         ]
     }
 }
