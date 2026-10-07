@@ -31,13 +31,14 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: toproc_prod
     volumes:
-      - postgres_data_prod:/var/lib/postgresql/data
+      - postgres_data_prod:/var/lib/postgresql
       - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U postgres']
-      interval: 5s
+      interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
     networks:
       - uru_network
     restart: always
